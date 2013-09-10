@@ -12,17 +12,13 @@ namespace Amplifier
 {
     public partial class Form1 : Form
     {
+        float R1, R2, R3, Vcc, Veb, R_c, beta;
+        double Vb,Rth,Ie;
         public Form1()
         {
             InitializeComponent();
         }
 
-
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -36,101 +32,61 @@ namespace Amplifier
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            TraCalBias();
         }
 
         private void pictureBox1_Click_1(object sender, EventArgs e)
         {
+            TraCalBias();
+        }
+
+        private void TraCalBias()
+        {
+            try
+            {
+                 R2 = float.Parse(textBox4.Text);
+                 R1 = float.Parse(textBox6.Text);
+                 R3 = float.Parse(textBox9.Text);
+               beta = float.Parse(textBox1.Text);
+                R_c = float.Parse(textBox3.Text);
+                Vcc = float.Parse(textBox7.Text);
+
+                Vb = Math.Round( Vcc*(R2)/((R1+R_c)+R2),2);
+                label3.Text = Convert.ToString(notation.ToEngineeringNotation(Vb));
+
+                Rth = Math.Round(((R1+R_c)*R2/(R1+R_c+R2)),2);
+                label2.Text = Convert.ToString(notation.ToEngineeringNotation(Rth));
+
+                Ie = Math.Round((((Vcc*R2-Veb*(R1+R2))*(beta+1))/(1)),3);
+
+            }
+            catch
+            {
+            }
+ 
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            TraCalBias();
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            TraCalBias();
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            TraCalBias();
+        }
+
+        private void CalFBA()
+        {
 
         }
-        
+
     }
-    static class MyExtensions
-    {
-        private static string ToEngineeringNotation(this double d)
-        {
-            double exponent = Math.Log10(Math.Abs(d));
-            if (Math.Abs(d) >= 1)
-            {
-                switch ((int)Math.Floor(exponent))
-                {
-                    case 0:
-                    case 1:
-                    case 2:
-                        return d.ToString();
-                    case 3:
-                    case 4:
-                    case 5:
-                        return (d / 1e3).ToString() + "k";
-                    case 6:
-                    case 7:
-                    case 8:
-                        return (d / 1e6).ToString() + "M";
-                    case 9:
-                    case 10:
-                    case 11:
-                        return (d / 1e9).ToString() + "G";
-                    case 12:
-                    case 13:
-                    case 14:
-                        return (d / 1e12).ToString() + "T";
-                    case 15:
-                    case 16:
-                    case 17:
-                        return (d / 1e15).ToString() + "P";
-                    case 18:
-                    case 19:
-                    case 20:
-                        return (d / 1e18).ToString() + "E";
-                    case 21:
-                    case 22:
-                    case 23:
-                        return (d / 1e21).ToString() + "Z";
-                    default:
-                        return (d / 1e24).ToString() + "Y";
-                }
-            }
-            else if (Math.Abs(d) > 0)
-            {
-                switch ((int)Math.Floor(exponent))
-                {
-                    case -1:
-                    case -2:
-                    case -3:
-                        return (d * 1e3).ToString() + "m";
-                    case -4:
-                    case -5:
-                    case -6:
-                        return (d * 1e6).ToString() + "μ";
-                    case -7:
-                    case -8:
-                    case -9:
-                        return (d * 1e9).ToString() + "n";
-                    case -10:
-                    case -11:
-                    case -12:
-                        return (d * 1e12).ToString() + "p";
-                    case -13:
-                    case -14:
-                    case -15:
-                        return (d * 1e15).ToString() + "f";
-                    case -16:
-                    case -17:
-                    case -18:
-                        return (d * 1e15).ToString() + "a";
-                    case -19:
-                    case -20:
-                    case -21:
-                        return (d * 1e15).ToString() + "z";
-                    default:
-                        return (d * 1e15).ToString() + "y";
-                }
-            }
-            else
-            {
-                return "0";
-            }
-        }
-    }
+    
 
 }
