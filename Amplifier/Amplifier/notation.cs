@@ -18,7 +18,7 @@ namespace Amplifier
                     case 0:
                     case 1:
                     case 2:
-                        return d.ToString();
+                        return (Math.Round(d,2)).ToString();
                     case 3:
                     case 4:
                     case 5:

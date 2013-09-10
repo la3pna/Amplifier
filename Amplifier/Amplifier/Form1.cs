@@ -15,6 +15,9 @@ namespace Amplifier
         float R1, R2, R3, Vcc, Veb, R_c, beta;
         double Vb,Rth,Ie;
 
+        float Idss, Id, Vp, Vdss, Vdd, Rb, Rdc, Zout; 
+        double Rs, Gm;
+
         public Form1()
         {
             InitializeComponent();
@@ -86,6 +89,56 @@ namespace Amplifier
         {
 
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            calfetR();
+        }
+
+        private void textBox12_TextChanged(object sender, EventArgs e)
+        {
+            calfetR();
+        }
+
+        private void label31_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void calfetR()
+        {
+            try
+            {
+                Vdd = float.Parse(textBox15.Text);
+                Idss = float.Parse(textBox11.Text);
+                Id = float.Parse(textBox12.Text);
+                Vp = float.Parse(textBox13.Text);
+                Rb = float.Parse(textBox17.Text);
+                Rdc = float.Parse(textBox14.Text);
+                Zout = float.Parse(textBox16.Text);
+
+                Rs = ((Vp / Id) * (Math.Sqrt(Id / Idss) - 1))-Rdc;
+                Gm = ((-2.0 * Idss)/Vp)*(1+((Id*Rs)/Vp));
+
+                label29.Text = Convert.ToString(notation.ToEngineeringNotation(Rs));
+                label33.Text = Convert.ToString(notation.ToEngineeringNotation(Gm));
+                float Isig = (float)Gm;
+                float Vout = Isig * Zout;
+                double Vz = Math.Sqrt(Zout / 50) * Vout;
+                double Vinz = Math.Sqrt(Rb / 50) * 1.0;
+                double gaindB = 20.0* Math.Log10(Vz/Vinz);
+                label34.Text = Convert.ToString(notation.ToEngineeringNotation(gaindB));
+
+            }
+            catch
+            {
+            }
+        }
+
+        private void textBox11_TextChanged(object sender, EventArgs e)
+        {
+            calfetR();
+        }
+
 
     }
     
