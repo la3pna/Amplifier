@@ -236,6 +236,7 @@
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(94, 20);
             this.textBox8.TabIndex = 5;
+            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
             // textBox7
             // 
@@ -244,6 +245,7 @@
             this.textBox7.Size = new System.Drawing.Size(66, 20);
             this.textBox7.TabIndex = 4;
             this.textBox7.Text = "12";
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // textBox6
             // 
@@ -468,6 +470,7 @@
             this.textBox13.Size = new System.Drawing.Size(100, 20);
             this.textBox13.TabIndex = 5;
             this.textBox13.Text = "-3,3";
+            this.textBox13.TextChanged += new System.EventHandler(this.textBox13_TextChanged);
             // 
             // textBox14
             // 
@@ -476,6 +479,7 @@
             this.textBox14.Size = new System.Drawing.Size(59, 20);
             this.textBox14.TabIndex = 6;
             this.textBox14.Text = "100";
+            this.textBox14.TextChanged += new System.EventHandler(this.textBox14_TextChanged);
             // 
             // textBox15
             // 
@@ -484,6 +488,7 @@
             this.textBox15.Size = new System.Drawing.Size(100, 20);
             this.textBox15.TabIndex = 7;
             this.textBox15.Text = "12";
+            this.textBox15.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
             // 
             // textBox17
             // 
@@ -491,6 +496,7 @@
             this.textBox17.Name = "textBox17";
             this.textBox17.Size = new System.Drawing.Size(35, 20);
             this.textBox17.TabIndex = 9;
+            this.textBox17.TextChanged += new System.EventHandler(this.textBox17_TextChanged);
             // 
             // label20
             // 
@@ -613,6 +619,7 @@
             this.textBox16.Name = "textBox16";
             this.textBox16.Size = new System.Drawing.Size(51, 20);
             this.textBox16.TabIndex = 25;
+            this.textBox16.TextChanged += new System.EventHandler(this.textBox16_TextChanged);
             // 
             // label33
             // 

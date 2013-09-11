@@ -139,6 +139,42 @@ namespace Amplifier
             calfetR();
         }
 
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox13_TextChanged(object sender, EventArgs e)
+        {
+            calfetR();
+
+        }
+
+        private void textBox15_TextChanged(object sender, EventArgs e)
+        {
+            calfetR();
+        }
+
+        private void textBox14_TextChanged(object sender, EventArgs e)
+        {
+            calfetR();
+        }
+
+        private void textBox17_TextChanged(object sender, EventArgs e)
+        {
+            calfetR();
+        }
+
+        private void textBox16_TextChanged(object sender, EventArgs e)
+        {
+            calfetR();
+        }
+
 
     }
     
