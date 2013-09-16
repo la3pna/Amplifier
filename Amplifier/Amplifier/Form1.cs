@@ -12,11 +12,13 @@ namespace Amplifier
 {
     public partial class Form1 : Form
     {
-        float R1, R2, R3, Vcc, Veb, R_c, beta;
+        float R1, R2, R3, Vcc, Veb, R_c, beta, Rsource, Rload;
         double Vb,Rth,Ie;
 
         float Idss, Id, Vp, Vdss, Vdd, Rb, Rdc, Zout; 
         double Rs, Gm;
+
+        float Rfa, Rf, Re ;
 
         public Form1()
         {
@@ -43,6 +45,7 @@ namespace Amplifier
             TraCalBias();
         }
 
+
         private void TraCalBias()
         {
             try
@@ -63,10 +66,14 @@ namespace Amplifier
 
                 Ie =((Vcc*R2-Veb*((R1+R_c)+R2))*(beta+1))/((R2+(R1+R_c))*R3*(beta+1)+(R1+R_c)*R2);
                 label6.Text = "Ie= " + Convert.ToString(notation.ToEngineeringNotation(Ie)) + "A";
+
+                
             }
             catch
             {
             }
+
+            CalFBA();
  
         }
 
@@ -87,6 +94,24 @@ namespace Amplifier
 
         private void CalFBA()
         {
+            try
+            {
+                Rfa = float.Parse(textBox5.Text);
+                Re = float.Parse(textBox10.Text);
+                Rload = float.Parse(textBox19.Text);
+                Rsource = float.Parse(textBox18.Text);
+
+                Rf = (R2*Rfa)/(R2+Rfa);
+                double a = ((Math.Pow((beta + 1), 2) * Math.Pow(Re, 2)) - (2 * beta * Rf * (beta + 1) * Re)) + (Math.Pow(beta,2) * Math.Pow(Rf,2));
+                double b = ((1 + beta) * Re * Rsource) * Rf + (Rload + Rsource + (beta * Rsource) + (beta * Rload)) * Re + (beta * Rsource * Rload) + (Rload * Rsource);
+               double Gain =10*Math.Log10(4.0*Rload*Rsource*(a/Math.Pow(b,2)));
+
+               label37.Text = "Gain: " + Convert.ToString(Gain)+"dB";
+
+            }
+            catch
+            { 
+            }
 
         }
 
@@ -104,6 +129,7 @@ namespace Amplifier
         {
 
         }
+
         private void calfetR()
         {
             try
@@ -173,6 +199,21 @@ namespace Amplifier
         private void textBox16_TextChanged(object sender, EventArgs e)
         {
             calfetR();
+        }
+
+        private void label37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox18_TextChanged(object sender, EventArgs e)
+        {
+            TraCalBias();
+        }
+
+        private void textBox19_TextChanged(object sender, EventArgs e)
+        {
+            TraCalBias();
         }
 
 
